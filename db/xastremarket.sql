@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Set-2020 às 00:30
+-- Tempo de geração: 17-Set-2020 às 00:34
 -- Versão do servidor: 10.4.13-MariaDB
 -- versão do PHP: 7.4.7
 
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `cadastros`
+--
+
+CREATE TABLE `cadastros` (
+  `id` int(11) NOT NULL,
+  `produto_id` int(11) NOT NULL,
+  `corredor` varchar(1) NOT NULL,
+  `prateleira` int(11) NOT NULL,
+  `lado` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produtos`
+--
+
+CREATE TABLE `produtos` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `xastremarket`
 --
 
@@ -38,6 +63,49 @@ CREATE TABLE `xastremarket` (
 
 INSERT INTO `xastremarket` (`configuracao`, `valor`) VALUES
 ('versao_produtos', '0');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `cadastros`
+--
+ALTER TABLE `cadastros`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foreignkey_produto_id` (`produto_id`);
+
+--
+-- Índices para tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `cadastros`
+--
+ALTER TABLE `cadastros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `cadastros`
+--
+ALTER TABLE `cadastros`
+  ADD CONSTRAINT `foreignkey_produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
