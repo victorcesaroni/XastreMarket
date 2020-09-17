@@ -1,6 +1,7 @@
 # XastreMarket
+![Screenshot](/doc/Screenshot_1.png)<br />
 
-![Documentação v0_16-09-2020](/doc/XastreMarket.png)<br />
+![Documentação](/doc/XastreMarket.png)<br />
 
 # Backend
 Laravel 8<br />

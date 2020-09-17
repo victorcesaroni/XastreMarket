@@ -114,28 +114,104 @@
                     </div>
                 </div>
 
-                @for($i = 0; $i < count($products); $i++)
-                    <div class="row">
-                        <div class="col-sm">
-                            {{$products[$i]["nome"]}}
-                        </div>
-                        <div class="col-sm">
-                            {{$products[$i]["corredor"]}}
-                        </div>
-                        <div class="col-sm">
-                            {{$products[$i]["prateleira"]}}
-                        </div>
-                        <div class="col-sm">
-                            {{$products[$i]["lado"]}}
-                        </div>
-                    </div>                   
-                @endfor
+                <div id="timer"></div>
+
+                <div id="produtos-table">
+                    @for($i = 0; $i < count($products); $i++)
+                        <div class="row">
+                            <div class="col-sm">
+                                {{$products[$i]["nome"]}}
+                            </div>
+                            <div class="col-sm">
+                                {{$products[$i]["corredor"]}}
+                            </div>
+                            <div class="col-sm">
+                                {{$products[$i]["prateleira"]}}
+                            </div>
+                            <div class="col-sm">
+                                {{$products[$i]["lado"]}}
+                            </div>
+                        </div>                   
+                    @endfor
+                </div>
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script-->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     
+        <script>
+            var update_interval = 7000;
+            var last_check = new Date;
+            var ultima_atualizacao = -1;
+            var should_update = false;
+
+            setInterval(function() {
+                var diff = new Date - last_check;
+
+                if (diff >= update_interval)
+                {
+                    last_check = new Date;
+
+                    $.get("{{route('api.ultimaAtualizacao')}}", function(result) {
+                        console.log(result);
+
+                        if (ultima_atualizacao != result["ultima_atualizacao"]) {
+                            should_update = true;
+                            ultima_atualizacao = result["ultima_atualizacao"];
+                        }
+                        
+                    })
+                    .fail(function() {
+                        alert( "error" );
+                    });      
+                    
+                    $('#timer').text("Verificando mudanças agora");              
+                }
+                else
+                {                    
+                    $('#timer').text("Verificando mudanças em " +  ((update_interval-diff)/1000).toFixed(0) + (update_interval-diff <= 1000 ? " segundo" : " segundos"));
+                }
+
+                if (should_update)
+                {
+                    should_update = false;
+
+                    $.get("{{route('api.listarProdutos')}}", function(result) {
+                        console.log(result);
+                        
+                        var t = "";
+                        
+                        for (var i = 0; i < result.length; i++) {
+                            t += "\
+                                <div id=\"produtos-table\">\
+                                    <div class=\"row\">\
+                                        <div class=\"col-sm\">\
+                                        " + result[i]["nome"] + "\
+                                        </div>\
+                                        <div class=\"col-sm\">\
+                                        " + result[i]["corredor"] + "\
+                                        </div>\
+                                        <div class=\"col-sm\">\
+                                        " + result[i]["prateleira"]+ "\
+                                        </div>\
+                                        <div class=\"col-sm\">\
+                                        " + result[i]["lado"]+ "\
+                                        </div>\
+                                    </div>\
+                            </div>\
+                            ".trim();
+                        }
+
+                        $("#produtos-table").html(t);
+                    })
+                    .fail(function() {
+                        alert( "error" );
+                    });
+                }
+            }, 1000);
+        </script>
     </body>
 </html>

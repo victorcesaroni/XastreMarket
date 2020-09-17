@@ -26,7 +26,7 @@ Route::get('/listar-produtos', function(Request $request) {
                 get();
 
     return $result;
-});
+})->name('api.listarProdutos');
 
 Route::get('/ultima-atualizacao', function(Request $request) {
     $result = DB::table('xastremarket')->
@@ -41,4 +41,4 @@ Route::get('/ultima-atualizacao', function(Request $request) {
     }
 
     return array("ultima_atualizacao" => -1);
-});
+})->name('api.ultimaAtualizacao');
