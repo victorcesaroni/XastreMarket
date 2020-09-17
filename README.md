@@ -2,6 +2,14 @@
 
 ![Documentação v0_16-09-2020](/doc/XastreMarket.png)<br />
 
+# Backend
+Laravel 8<br />
+MySQL<br />
+
+# Frontend
+Laravel 8<br />
+Bootstrap<br />
+
 # Misc
 
 Comando usado para criar o projeto do laravel:<br />
@@ -35,3 +43,8 @@ HomeController - app/Http/HomeController.php<br />
 # Views
 
 HomeView - resources/views/home.blade.php<br />
+
+# Components
+
+php artisan make:component Header<br />
+Header - app/View/Components/Header.php & resources/views/components/header.blade.php
