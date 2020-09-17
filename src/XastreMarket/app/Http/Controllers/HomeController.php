@@ -15,8 +15,25 @@ class HomeController extends Controller
            array("name" => "Prod4", "loc" => "Loc4"),
            array("name" => "Prod5", "loc" => "Loc5"),
         );
-        
+
         return view('home', compact('products'));
+    }
+
+    public function addproduct(Request $request)
+    {
+        $valid = $request->validate([
+            'nome' => 'required',
+            'corredor' => 'required',
+            'prateleira' => 'required',
+            'lado' => 'required'
+        ]);
+        
+        $nome = $request->input('nome');
+        $corredor = $request->input('corredor');
+        $prateleira = $request->input('prateleira');
+        $lado = $request->input('lado');
+
+        return "UnderDev $nome $corredor $prateleira $lado";
     }
 }
 

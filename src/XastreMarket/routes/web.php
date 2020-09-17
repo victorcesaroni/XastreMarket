@@ -20,3 +20,5 @@ use App\Http\Controllers\HomeController;
 });*/
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+Route::post('/addproduct', [HomeController::class, 'addproduct'])->name('home.addproduct');

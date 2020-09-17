@@ -28,37 +28,62 @@
             <div class="form-group">
                 <h2>Cadastrar Produto</h2>    
                 
-                <form>        
+                <form method="POST" action="{{route('home.addproduct')}}">       
+                    @csrf 
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input id="nome" class="form-control" type="text" placeholder="Nome">
+                        <input id="nome" class="form-control" type="text" placeholder="Nome" name="nome">
+
+                        @error('nome')
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert—check it out!
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="corredor">Corredor</label>
-                        <select class="form-control" id="corredor">
+                        <select class="form-control" id="corredor" name="corredor">
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
                         </select>
+
+                        @error('corredor')
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert—check it out!
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="prateleira">Prateleira</label>
-                        <select multiple class="form-control" id="prateleira">
+                        <select multiple class="form-control" id="prateleira" name="prateleira">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         </select>
+
+                        @error('prateleira')
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert—check it out!
+                        </div>
+                        @enderror
                     </div>
                     
                     <div class="form-group">
                         <label for="lado">Lado</label>
-                        <select class="form-control" id="lado">
+                        <select class="form-control" id="lado" name="lado">
                         <option>Direita</option>
                         <option>Esquerda</option>
                         </select>
+
+                        @error('lado')
+                        <div class="alert alert-primary" role="alert">
+                            This is a primary alert—check it out!
+                        </div>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
