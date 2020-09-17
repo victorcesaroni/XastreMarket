@@ -10,6 +10,7 @@ MySQL<br />
 # Frontend
 Laravel 8<br />
 Bootstrap<br />
+JQuery<br />
 
 # Misc
 
