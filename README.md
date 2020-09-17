@@ -26,7 +26,7 @@ OK - Criar interface da home utilizando bootstrap<br />
 OK - Criar rota para cadastrar produto<br />
 OK - Criar rota para listar produtos<br />
 OK - Criar rota para verificar se o BD foi atualizado<br />
-TD - Atualizar a lista de produtos via javascript utilizando a rota de API para listar produtos<br />
+OK - Atualizar a lista de produtos via javascript utilizando a rota de API para listar produtos<br />
 
 # API
 
