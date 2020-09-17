@@ -52,6 +52,9 @@ class HomeController extends Controller
             'lado' => $lado === 'Esquerda' ? "E" : "D",
         ]);
 
+        DB::table('xastremarket')->where('configuracao','=','versao_produtos')->
+            increment('valor', 1);
+        
         return back()->with("msg", "id=$id UnderDev $nome $corredor $prateleira $lado");
     }
 }

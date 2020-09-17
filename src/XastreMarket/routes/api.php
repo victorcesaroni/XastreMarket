@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +19,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/cadastrarProduto', function(Request $request) {
-    return "Under Dev";
+Route::get('/listar-produtos', function(Request $request) {
+    $result = DB::table('cadastros')->
+                join('produtos','cadastros.produto_id','=','produtos.id')->
+                select('produtos.id AS produto_id', 'produtos.nome AS nome', 'cadastros.corredor AS corredor', 'cadastros.prateleira AS prateleira', 'cadastros.lado AS lado')->
+                get();
+
+    return $result;
 });
 
-Route::get('/atualizarLocalizacaoProduto/{produto_id}', function($produto_id) {
-    return "Under Dev (produto_id=$produto_id)";
-});
+Route::get('/ultima-atualizacao', function(Request $request) {
+    $result = DB::table('xastremarket')->
+                select('configuracao', 'valor')->get();
+    
+    $xastremarket = json_decode($result, true);
 
-Route::get('/listarProdutos', function(Request $request) {
-    return "Under Dev";
-});
+    foreach ($xastremarket as $row)
+    {
+        if ($row['configuracao'] === 'versao_produtos')
+            return array("ultima_atualizacao" => (int)$row['valor']);
+    }
 
-Route::get('/ultimaAtualizacao', function(Request $request) {
-    return "Under Dev";
+    return array("ultima_atualizacao" => -1);
 });

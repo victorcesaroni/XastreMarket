@@ -20,12 +20,11 @@ composer -vvv create-project laravel/laravel --prefer-dist XastreMarket --no-sec
 OK - Projetar BD<br />
 OK - Criar BD<br />
 OK - Criar ambiente laravel<br />
-TD - Criar interface da home utilizando bootstrap<br />
-TD - Criar rota para cadastrar produto<br />
-TD - Criar rota para atualizar a localização de um produto<br />
-TD - Criar rota para listar produtos<br />
-TD - Criar rota para verificar se o BD foi atualizado<br />
-TD - Conectar a interface com as rotas usando o laravel<br />
+OK - Criar interface da home utilizando bootstrap<br />
+OK - Criar rota para cadastrar produto<br />
+OK - Criar rota para listar produtos<br />
+OK - Criar rota para verificar se o BD foi atualizado<br />
+TD - Atualizar a lista de produtos via javascript utilizando a rota de API para listar produtos<br />
 
 # API
 
