@@ -26,6 +26,11 @@
 
         <div class="container">       
             <div class="form-group">
+                @if(Session::has('msg'))
+                    <div class="alert alert-primary" role="alert">
+                        {{Session::get('msg')}}
+                    </div>
+                @endif
                 <h2>Cadastrar Produto</h2>    
                 
                 <form method="POST" action="{{route('home.addproduct')}}">       
@@ -96,20 +101,32 @@
                 <h2>Lista de Produtos</h2>
                 <div class="row">
                     <div class="col-sm">
-                    <b>Nome</b>
+                        <b>Nome</b>
                     </div>
                     <div class="col-sm">
-                    <b>Localização</b>
+                        <b>Corredor</b>
+                    </div>
+                    <div class="col-sm">
+                        <b>Prateleira</b>
+                    </div>
+                    <div class="col-sm">
+                        <b>Lado</b>
                     </div>
                 </div>
 
                 @for($i = 0; $i < count($products); $i++)
                     <div class="row">
                         <div class="col-sm">
-                        {{$products[$i]["name"]}}
+                            {{$products[$i]["nome"]}}
                         </div>
                         <div class="col-sm">
-                        {{$products[$i]["loc"]}}
+                            {{$products[$i]["corredor"]}}
+                        </div>
+                        <div class="col-sm">
+                            {{$products[$i]["prateleira"]}}
+                        </div>
+                        <div class="col-sm">
+                            {{$products[$i]["lado"]}}
                         </div>
                     </div>                   
                 @endfor
