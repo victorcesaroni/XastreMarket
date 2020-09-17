@@ -30,16 +30,13 @@ OK - Atualizar a lista de produtos via javascript utilizando a rota de API para 
 
 # API
 
-GET api/cadastrarProduto<br />
-GET api/atualizarLocalizacaoProduto<br />
-GET api/listarProdutos<br />
-GET api/ultimaAtualizacao<br />
+GET api/listar-produtos<br />
+GET api/ultima-atualizacao<br />
 
 # Controllers
 
 php artisan make:controller HomeController<br />
 HomeController - app/Http/HomeController.php<br />
-<br />
 
 # Views
 
